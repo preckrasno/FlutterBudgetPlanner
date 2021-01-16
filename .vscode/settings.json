@@ -1,0 +1,10 @@
+{
+    "cSpell.words": [
+        "sqflite"
+    ],
+    "dart.allowAnalytics": false,
+    "[dart]" : {
+
+        "editor.rulers": []
+        }
+}

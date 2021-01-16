@@ -1,6 +1,6 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/flutter,android,androidstudio,firebase,java,kotlin,swift,dart
-# Edit at https://www.toptal.com/developers/gitignore?templates=flutter,android,androidstudio,firebase,java,kotlin,swift,dart
+# Edit at https://www.toptal.com/developers/gitignore?templates=flutter,android,androidstudio,firebase,java,kotlin,swift,dart,vscode
 
 ### Android ###
 # Built application files
@@ -20,7 +20,7 @@ bin/
 gen/
 out/
 #  Uncomment the following line in case you need and you don't have the release build type files in your app
-# release/
+release/
 
 # Gradle files
 .gradle/
@@ -65,7 +65,7 @@ captures/
 .cxx/
 
 # Google Services (e.g. APIs or Firebase)
-# google-services.json
+google-services.json
 
 # Freeline
 freeline.py
