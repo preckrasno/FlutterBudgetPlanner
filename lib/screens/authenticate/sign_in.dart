@@ -24,7 +24,7 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
             print('error signing in');
           } else {
             print('signed in');
-            print(result);
+            print(result.uid);
           }
         },
       )),
