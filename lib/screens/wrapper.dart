@@ -8,9 +8,13 @@ class WrapperWidgetClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserClass>(context);
-    print('WrapperWidgetClass user = $user');
+    print('wrapper.dart WrapperWidgetClass user = "$user"');
 
     //return either Home or Authenticate widget
-    return AuthenticateWidgetClass();
+    if (user == null) {
+      return AuthenticateWidgetClass();
+    } else {
+      return HomeWidgetClass();
+    }
   }
 }

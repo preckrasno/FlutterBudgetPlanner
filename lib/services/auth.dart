@@ -27,6 +27,7 @@ class AuthServiceClass {
     try {
       UserCredential result = await _auth.signInAnonymously();
       User user = result.user;
+      print('auth.dart anon user obj before changes $user');
       return _userFromFirebaseUser(user);
     } catch (e) {
       log('signInAnonMethod error = $e');
@@ -39,5 +40,12 @@ class AuthServiceClass {
   //register email user
 
   //sign out
-
+  Future signOutFunction() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print('signOutFunction error = $e');
+      return null;
+    }
+  }
 }
