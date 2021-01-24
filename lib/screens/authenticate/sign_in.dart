@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_budget_planner/services/auth.dart';
 
 class SignInWidgetClass extends StatefulWidget {
+  
+  final Function toggleViewParam;
+  SignInWidgetClass({ this.toggleViewParam });
+
   @override
   _SignInWidgetClassState createState() => _SignInWidgetClassState();
 }
@@ -20,9 +24,11 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
       appBar: AppBar(
         title: Text('Sign in to Budget Planner'),
         actions: <Widget>[
-          FlatButton.icon(onPressed: null,
+          FlatButton.icon(onPressed: (){
+            widget.toggleViewParam();
+          },
           icon: Icon(Icons.person),
-          label: Text('Register'),
+          label: Text('Sign Up'),
           )
         ],
       ),
@@ -53,7 +59,7 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
                 onPressed: () async {
                   print('sign_in.dart email = $email, password = $password.');
                 },
-              )
+              ),
             ],
           ),
         ),
