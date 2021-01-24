@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_budget_planner/services/auth.dart';
 
-class SignInWidgetClass extends StatefulWidget {
+class SignUpWidgetClass extends StatefulWidget {
   @override
-  _SignInWidgetClassState createState() => _SignInWidgetClassState();
+  _SignUpWidgetClassState createState() => _SignUpWidgetClassState();
 }
 
-class _SignInWidgetClassState extends State<SignInWidgetClass> {
+class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
 
   final AuthServiceClass _auth = AuthServiceClass();
 
@@ -18,13 +18,7 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign in to Budget Planner'),
-        actions: <Widget>[
-          FlatButton.icon(onPressed: null,
-          icon: Icon(Icons.person),
-          label: Text('Register'),
-          )
-        ],
+        title: Text('Sign up to Budget Planner'),
       ),
       body: Container(
         child: Form(
@@ -49,7 +43,7 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
               ),
               SizedBox(height: 20.0,),
               RaisedButton(
-                child: Text('Sign in'),
+                child: Text('Sign up'),
                 onPressed: () async {
                   print('sign_in.dart email = $email, password = $password.');
                 },
