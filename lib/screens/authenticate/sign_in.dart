@@ -13,10 +13,12 @@ class SignInWidgetClass extends StatefulWidget {
 class _SignInWidgetClassState extends State<SignInWidgetClass> {
 
   final AuthServiceClass _auth = AuthServiceClass();
+  final _formKey = GlobalKey<FormState>();
 
   // text field statefulWidget
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +36,14 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
       ),
       body: Container(
         child: Form(
+          key: _formKey,
           child: Column(
             children: <Widget>[
               SizedBox(
                 height: 20.0,
               ),
               TextFormField(
+                validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
                 },
@@ -49,6 +53,7 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
               ),
               TextFormField(
                 obscureText: true,
+                validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -57,8 +62,17 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
               RaisedButton(
                 child: Text('Sign in'),
                 onPressed: () async {
-                  print('sign_in.dart email = $email, password = $password.');
+                  if (_formKey.currentState.validate()) {
+                    print('sign_in.dart valid');
+                    dynamic result = await _auth.signInWithEmailPassword(email, password);
+                    if(result == null) {
+                      setState(() => error = 'Could not sign in');
+                    }
+                  }
                 },
+              ),
+              Text(
+                error
               ),
             ],
           ),
