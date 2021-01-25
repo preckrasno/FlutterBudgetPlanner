@@ -38,6 +38,20 @@ class AuthServiceClass {
   //sign in email
 
   //register email user
+  Future registerWithEmailPassword(String email, String password) async {
+    try {
+      //They renamed the class AuthResult to UserCredential
+      UserCredential  result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      //the class FirebaseUser was changed to User
+      User user = result.user;
+      print('auth.dart original user = $user');
+      print('auth.dart custom user = ${_userFromFirebaseUser(user)}');
+      return _userFromFirebaseUser(user); 
+    } catch (e) {
+      print('auth.dart register error:"$e"');
+      return null;
+    }
+  }
 
   //sign out
   Future signOutFunction() async {
