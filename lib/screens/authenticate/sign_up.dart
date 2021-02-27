@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_budget_planner/services/auth.dart';
+import 'package:flutter_budget_planner/shared/loading.dart';
 
 class SignUpWidgetClass extends StatefulWidget {
   final Function toggleViewParam;
@@ -12,6 +13,7 @@ class SignUpWidgetClass extends StatefulWidget {
 class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
   final AuthServiceClass _auth = AuthServiceClass();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   // text field statefulWidget
   String email = '';
@@ -20,7 +22,7 @@ class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? LoadingWidget() : Scaffold(
       appBar: AppBar(
         title: Text('Sign up to Budget Planner'),
         actions: <Widget>[
@@ -70,9 +72,15 @@ class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
                 child: Text('Sign up'),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
+                    setState(() {
+                      loading = true;
+                    });
                     dynamic result = await _auth.registerWithEmailPassword(email, password);
                     if(result == null) {
-                      setState(() => error = 'please supply a valid email');
+                      setState(() {
+                        error = 'please supply a valid email';
+                        loading = false;
+                      });
                     }
                   }
                 },
