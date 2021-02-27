@@ -13,7 +13,8 @@ class SignUpWidgetClass extends StatefulWidget {
 class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
   final AuthServiceClass _auth = AuthServiceClass();
   final _formKey = GlobalKey<FormState>();
-  bool loading = false;
+  bool isLoading = false;
+  bool _passwordVisible = false;
 
   // text field statefulWidget
   String email = '';
@@ -22,7 +23,7 @@ class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    return isLoading
         ? LoadingWidget()
         : Scaffold(
             appBar: AppBar(
@@ -47,6 +48,7 @@ class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                        labelText: 'Email',
                         hintText: 'Email',
                       ),
                       keyboardType: TextInputType.emailAddress,
@@ -61,12 +63,28 @@ class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                        labelText: 'Password',
                         hintText: 'Password',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            // Based on passwordVisible state choose the icon
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            // Update the state i.e. toogle the state of passwordVisible variable
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                        ),
                       ),
                       enableSuggestions: false,
                       autofillHints: [AutofillHints.newPassword],
                       autocorrect: false,
-                      obscureText: true,
+                      obscureText: !_passwordVisible,
                       validator: (val) => val.length < 6
                           ? 'Enter a password 6+ chars long'
                           : null,
@@ -82,14 +100,14 @@ class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           setState(() {
-                            loading = true;
+                            isLoading = true;
                           });
                           dynamic result = await _auth
                               .registerWithEmailPassword(email, password);
                           if (result == null) {
                             setState(() {
                               error = 'please supply a valid email';
-                              loading = false;
+                              isLoading = false;
                             });
                           }
                         }
