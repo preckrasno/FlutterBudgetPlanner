@@ -47,6 +47,8 @@ class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
                 decoration: InputDecoration(
                   hintText: 'Email',
                 ),
+                keyboardType: TextInputType.emailAddress,
+                autofillHints: [AutofillHints.email],
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -59,6 +61,9 @@ class _SignUpWidgetClassState extends State<SignUpWidgetClass> {
                 decoration: InputDecoration(
                   hintText: 'Password',
                 ),
+                enableSuggestions: false,
+                autofillHints: [AutofillHints.newPassword],
+                autocorrect: false,
                 obscureText: true,
                 validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {

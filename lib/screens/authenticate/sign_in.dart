@@ -14,6 +14,7 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
   final AuthServiceClass _auth = AuthServiceClass();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  bool _passwordVisible = false;
 
   // text field statefulWidget
   String email = '';
@@ -45,8 +46,11 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
               ),
               TextFormField(
                 decoration: InputDecoration(
+                  labelText: 'Email',
                   hintText: 'Email',
                 ),
+                keyboardType: TextInputType.emailAddress,
+                autofillHints: [AutofillHints.email],
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -57,8 +61,12 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
               ),
               TextFormField(
                 decoration: InputDecoration(
+                  labelText: 'Password',
                   hintText: 'Password',
                 ),
+                enableSuggestions: false,
+                autofillHints: [AutofillHints.password],
+                autocorrect: false,
                 obscureText: true,
                 validator: (val) =>
                     val.length < 6 ? 'Enter a password 6+ chars long' : null,

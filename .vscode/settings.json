@@ -1,7 +1,8 @@
 {
     "cSpell.words": [
-        "sqflite"
-    ],
+		"autocorrect",
+		"sqflite"
+	],
     "dart.allowAnalytics": false,
     "[dart]": {
 		// Automatically format code on save and during typing of certain characters
