@@ -3,6 +3,7 @@ import 'package:flutter_budget_planner/services/auth.dart';
 
 class HomeWidgetClass extends StatelessWidget {
   final AuthServiceClass _auth = AuthServiceClass();
+  
 
   @override
   Widget build(BuildContext context) {
