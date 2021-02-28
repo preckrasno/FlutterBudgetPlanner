@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeWidgetClass extends StatelessWidget {
   final AuthServiceClass _auth = AuthServiceClass();
+  
 
   @override
   Widget build(BuildContext context) {
