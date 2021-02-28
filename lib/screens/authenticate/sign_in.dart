@@ -65,26 +65,11 @@ class _SignInWidgetClassState extends State<SignInWidgetClass> {
                       decoration: InputDecoration(
                         labelText: 'Password',
                         hintText: 'Password',
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            // Based on passwordVisible state choose the icon
-                            _passwordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Theme.of(context).primaryColorDark,
-                          ),
-                          onPressed: () {
-                            // Update the state i.e. toogle the state of passwordVisible variable
-                            setState(() {
-                              _passwordVisible = !_passwordVisible;
-                            });
-                          },
-                        ),
                       ),
                       enableSuggestions: false,
                       autofillHints: [AutofillHints.password],
                       autocorrect: false,
-                      obscureText: !_passwordVisible,
+                      obscureText: true,
                       validator: (val) => val.length < 6
                           ? 'Enter a password 6+ chars long'
                           : null,
