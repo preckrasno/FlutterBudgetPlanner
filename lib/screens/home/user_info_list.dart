@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
-class UserList extends StatefulWidget {
+class UserInfoList extends StatefulWidget {
   @override
   _UserListState createState() => _UserListState();
 }
 
-class _UserListState extends State<UserList> {
+class _UserListState extends State<UserInfoList> {
 
 
 

@@ -37,7 +37,7 @@ class DatabaseService {
   }
 
   //get users stream
-  Stream<QuerySnapshot> get users {
+  Stream<QuerySnapshot> get userInfo {
     return userCollection.snapshots();
   }
 
