@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer';
 
 import 'package:flutter_budget_planner/models/user.dart';
+import 'package:flutter_budget_planner/services/database.dart';
 
 class AuthServiceClass {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -39,12 +40,13 @@ class AuthServiceClass {
   Future signInWithEmailPassword(String email, String password) async {
     try {
       //They renamed the class AuthResult to UserCredential
-      UserCredential  result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       //the class FirebaseUser was changed to User
       User user = result.user;
       print('auth.dart original user = $user');
       print('auth.dart custom user = ${_userFromFirebaseUser(user)}');
-      return _userFromFirebaseUser(user); 
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print('auth.dart register error:"$e"');
       return null;
@@ -55,12 +57,16 @@ class AuthServiceClass {
   Future registerWithEmailPassword(String email, String password) async {
     try {
       //They renamed the class AuthResult to UserCredential
-      UserCredential  result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       //the class FirebaseUser was changed to User
       User user = result.user;
+
+      await DatabaseService(uid: user.uid).updateUserData();
+
       print('auth.dart original user = $user');
       print('auth.dart custom user = ${_userFromFirebaseUser(user)}');
-      return _userFromFirebaseUser(user); 
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print('auth.dart register error:"$e"');
       return null;
